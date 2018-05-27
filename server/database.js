@@ -12,7 +12,7 @@ const getAllFavorites = function(callback) {
 };
 
 const saveFavorite = function(movie, callback) {
-  let queryStr = `INSERT INTO movies VALUES (${movie.id}, '${movie.title}', '${movie.poster}', ${movie.popularity}, ${movie.year});`
+  let queryStr = `INSERT INTO movies VALUES (${movie.id}, '${movie.title}', '${movie.poster}', ${movie.popularity}, '${movie.year}');`
   connection.query(queryStr, function(err, results) {
     if (err) callback(err);
     else callback();

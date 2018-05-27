@@ -7,6 +7,6 @@ CREATE TABLE movies (
     title varchar(100),
     poster varchar(100),
     popularity int,
-    year int,
+    year varchar(5),
     PRIMARY KEY (id)
 );
