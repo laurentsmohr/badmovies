@@ -1,18 +1,30 @@
 const mysql = require('mysql');
-const mysqlConfig = require('./config.js');
+const {db} = require('./config.js');
 
-const connection = mysql.createConnection(mysqlConfig);
+const connection = mysql.createConnection(db);
 
 const getAllFavorites = function(callback) {
-  // get favorites from the database
+  let queryStr = 'SELECT * FROM movies;'
+  connection.query(queryStr, function(err, results) {
+    if (err) callback(err, null);
+    else callback(null, results);
+  })
 };
 
-const saveFavorite = function(callback) {
-  // save movie to favorites in the database
+const saveFavorite = function(movie, callback) {
+  let queryStr = `INSERT INTO movies VALUES (${movie.id}, '${movie.title}', '${movie.poster}', ${movie.popularity}, ${movie.year});`
+  connection.query(queryStr, function(err, results) {
+    if (err) callback(err);
+    else callback();
+  })
 };
 
-const deleteFavorites = function(callback) {
-  // delete a movie from favorites in the database
+const deleteFavorite = function(movieID, callback) {
+  let queryStr = `DELETE FROM movies WHERE id=${movieID};`
+  connection.query(queryStr, function(err, results) {
+    if (err) callback(err, null);
+    else callback(null, results);
+  })
 };
 
 module.exports = {

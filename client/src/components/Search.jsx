@@ -4,11 +4,29 @@ class Search extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      genres: []
+      genres: [],
+      genreIDs: {}
     };
+    this.getGenres = this.getGenres.bind(this);
   }
   getGenres() {
-    //make an axios request in this component to get the list of genres from your endpoint GET GENRES
+    axios.get('/genres')
+    .then(response => {
+      console.log('getGenres response: ', response);
+      var idObj = {};
+      var genreArr = [];
+      response.forEach(genre => {
+        genreArr.push(genre.name);
+        idObj[genre.name] = genre.id;
+      });
+      this.setState({
+        genres: genreArr,
+        genreIDs: idObj
+      })
+    })
+    .catch(err => {
+      console.error(err);
+    })
   }
 
   render() {

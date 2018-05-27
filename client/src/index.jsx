@@ -14,11 +14,26 @@ class App extends React.Component {
       showFaves: false,
     };
     
-    // you might have to do something important here!
+    this.getMovies = this.getMovies.bind(this);
+    this.saveMovie = this.saveMovie.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this);
+    this.swapFavorites = this.swapFavorites.bind(this);
+  }
+  componentDidMount() {
+    axios.get('/favorites')
+    .then(res => {
+      this.setState({
+        favorites: res
+      })
+    }).catch(err => {
+      console.error('error getting favs', err);
+    })
   }
 
-  getMovies() {
-    // make an axios request to your server on the GET SEARCH endpoint
+  getMovies(genre_id) {
+    axios.post('/search', {
+      genre: genre_id
+    })
   }
 
   saveMovie() {

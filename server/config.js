@@ -1,7 +1,7 @@
-module.exports = {
+module.exports.db = {
   host: 'localhost',
-  user: 'ur sql username which is probably root', 
-  password: 'ur sql password which is probably nothing', 
-  database: 'badmovies',
-  API_KEY: 'API_KEY_GOES_HERE',
+  user: 'student', 
+  password: 'student', 
+  database: 'badmovies'
 };
+module.exports.API_KEY = '246d9413de978f057d4667031509f725';
